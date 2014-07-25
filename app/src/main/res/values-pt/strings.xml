@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_section1">Amigos</string>
+    <string name="title_section2">Configurações</string>
+    <string name="login_with_facebook">Conectar com Facebook</string>
+
+</resources>

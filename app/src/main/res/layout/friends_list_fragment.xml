@@ -1,0 +1,40 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#e3e3e3"
+    tools:context="com.solvian.mobile.store.fragment.MyAppsFragment">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+
+    <ProgressBar
+        android:layout_width="fill_parent"
+        android:layout_height="10dp"
+        android:id="@+id/pb_application_list"
+        android:indeterminate="true"
+        android:indeterminateOnly="false"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:visibility="gone"
+        android:layout_marginTop="-7dp"/>
+    <TextView android:id="@+id/lbl_empty_message"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/lbl_no_apps_installed"
+        android:visibility="gone"
+        />
+    <com.vitorcampos.socialnetworkconnect.view.InfiniteListView
+            android:id="@+id/el"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#e3e3e3"
+        android:divider="#e3e3e3"
+        android:dividerHeight="10dp"
+        android:padding="10dp"
+        android:listSelector="@drawable/list_selector"/>
+
+
+    </LinearLayout>
+</RelativeLayout>
