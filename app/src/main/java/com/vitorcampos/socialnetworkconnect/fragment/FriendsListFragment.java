@@ -1,6 +1,7 @@
 package com.vitorcampos.socialnetworkconnect.fragment;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -34,17 +35,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
- * A placeholder fragment containing a simple view.
- */
 public class FriendsListFragment extends Fragment implements InfiniteListView.InfiniteLoadListener{
-    /**
-     * The fragment argument representing the section number for this
-     * fragment.
-     */
     private static final String ARG_SECTION_NUMBER = "section_number";
 
-    private ListView applicationListView;
     private InfiniteListView listView;
     private ArrayList<FriendListItem> listElements;
     private int lastPage = 0;
@@ -52,13 +45,9 @@ public class FriendsListFragment extends Fragment implements InfiniteListView.In
     private InfiniteLoadAdapter infiniteLoadAdapter;
     static Context context;
     private TextView emptyMessage;
-    private ProgressBar progressBar;
-    View rootView;
+    private View rootView;
+    private ProgressDialog dialog;
 
-    /**
-     * Returns a new instance of this fragment for the given section
-     * number.
-     */
     public FriendsListFragment(Context context, int sectionNumber) {
         this.context = context;
         Bundle args = new Bundle();
@@ -95,7 +84,8 @@ public class FriendsListFragment extends Fragment implements InfiniteListView.In
         listView.setAdapter(infiniteLoadAdapter);
 
         listView.setListener(this);
-
+        dialog = ProgressDialog.show(getActivity(), "",
+                context.getString(R.string.loading_label), true);
         getFriendsFQL();
         return rootView;
     }
@@ -112,7 +102,9 @@ public class FriendsListFragment extends Fragment implements InfiniteListView.In
         Session session = Session.getActiveSession();
         String fqlQuery = "SELECT uid,name,pic_square FROM user WHERE uid IN " +
                 "(SELECT uid2 FROM friend WHERE uid1 = me()) order by name limit " + lastPage + "," + nextPage;
-
+        if (lastPage == 0 && !dialog.isShowing()){
+            dialog.show();
+        }
         Bundle params = new Bundle();
         params.putString("q", fqlQuery);
 
@@ -122,8 +114,10 @@ public class FriendsListFragment extends Fragment implements InfiniteListView.In
                 HttpMethod.GET,
                 new Request.Callback(){
                     public void onCompleted(Response response) {
-                        Log.i("INFO", "Result: " + response.toString());
-
+                        Log.i(Constants.LOG_TAG, "Result: " + response.toString());
+                        if (dialog != null && dialog.isShowing()){
+                            dialog.cancel();
+                        }
                         try{
                             GraphObject graphObject = response.getGraphObject();
                             JSONObject jsonObject = graphObject.getInnerJSONObject();

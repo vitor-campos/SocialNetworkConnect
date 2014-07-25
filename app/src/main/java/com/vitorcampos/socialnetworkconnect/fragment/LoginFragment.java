@@ -14,6 +14,7 @@ import com.facebook.UiLifecycleHelper;
 import com.facebook.widget.LoginButton;
 import com.vitorcampos.socialnetworkconnect.R;
 import com.vitorcampos.socialnetworkconnect.activity.MainActivity;
+import com.vitorcampos.socialnetworkconnect.util.Constants;
 
 import java.util.Arrays;
 
@@ -21,7 +22,6 @@ import java.util.Arrays;
  * Created by vitorcampos on 22/07/14.
  */
 public class LoginFragment extends Fragment {
-    private static final String TAG = "MainFragment";
     private UiLifecycleHelper uiHelper;
 
     @Override
@@ -43,11 +43,12 @@ public class LoginFragment extends Fragment {
 
     private void onSessionStateChange(Session session, SessionState state, Exception exception) {
         if (state.isOpened()) {
-            Log.i(TAG, "Logged in...");
+            Log.i(Constants.LOG_TAG, "Logged in...");
             Intent intent = new Intent(getActivity(), MainActivity.class);
             startActivity(intent);
+            getActivity().finish();
         } else if (state.isClosed()) {
-            Log.i(TAG, "Logged out...");
+            Log.i(Constants.LOG_TAG, "Logged out...");
         }
     }
 

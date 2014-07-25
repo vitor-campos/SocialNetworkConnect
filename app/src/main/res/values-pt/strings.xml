@@ -3,5 +3,15 @@
     <string name="title_section1">Amigos</string>
     <string name="title_section2">Configurações</string>
     <string name="login_with_facebook">Conectar com Facebook</string>
-
+    <string name="lbl_no_apps_installed">Não foram encontrados amigos</string>
+    <string name="action_exit">Sair</string>
+    <string name="action_settings">Configurações</string>
+    <string name="login_title">Bem Vindo</string>
+    <string name="login_subtitle">Efetue o login para começar</string>
+    <string name="loading_label">Carregando lista de amigos, aguarde um pouco....</string>
+    <string name="loading_user_info_label">Carregando informações, aguarde um pouco...</string>
+    <string name="title_facebook_login">Login Facebook</string>
+    <string name="birthday_label">Nascimento:</string>
+    <string name="location_label">Local:</string>
+    <string name="locale_label">Idioma:</string>
 </resources>

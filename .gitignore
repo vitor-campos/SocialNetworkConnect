@@ -20,7 +20,6 @@ local.properties
 /build/
 /bin/
 *.DS_Store
-bin/
 *.classpath
 resources.prefs
 .idea/
